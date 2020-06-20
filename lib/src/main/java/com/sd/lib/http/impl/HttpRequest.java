@@ -282,18 +282,7 @@ public class HttpRequest {
 
         public void checkServerTrusted(X509Certificate[] chain, String authType) {
           // Intentionally left blank
-          if (chain == null) {
-            throw new IllegalArgumentException("checkServerTrusted: X509Certificate array is null");
-          }
-
-          if (!(chain.length > 0)) {
-            throw new IllegalArgumentException("checkServerTrusted: X509Certificate is empty");
-          }
-
-          if (!(null != authType && authType.equalsIgnoreCase("RSA"))) {
-
-            throw new CertificateException("checkServerTrusted: AuthType is not RSA");
-          }
+          x509TrustManager.checkServerTrusted(chain, authType);
         }
       } };
       try {
