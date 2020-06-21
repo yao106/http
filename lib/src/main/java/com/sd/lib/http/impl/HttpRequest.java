@@ -291,9 +291,10 @@ public class HttpRequest {
             throw new IllegalArgumentException("checkServerTrusted: X509Certificate is empty");
           }
 
-          if (!(null != authType && authType.equalsIgnoreCase("RSA"))) {
-
-            throw new CertificateException("checkServerTrusted: AuthType is not RSA");
+          try {
+            chain[0].checkValidity();
+          } catch (Exception e) {
+            throw new CertificateException("Certificate not valid or trusted.");
           }
         }
       } };
